@@ -16,7 +16,7 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.auto.SysNotice;
 import com.fc.v2.model.custom.Tablepar;
 import com.fc.v2.satoken.SaTokenUtil;
-import com.fc.v2.service.SysNoticeService;
+import com.fc.v2.service.impl.SysNoticeService;
 import com.github.pagehelper.PageInfo;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;

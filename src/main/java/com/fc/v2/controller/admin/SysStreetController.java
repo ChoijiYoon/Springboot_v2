@@ -3,6 +3,7 @@ package com.fc.v2.controller.admin;
 import java.util.List;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import com.fc.v2.service.SysAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,8 +14,7 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.model.auto.SysArea;
 import com.fc.v2.model.auto.SysStreet;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.SysAreaService;
-import com.fc.v2.service.SysStreetService;
+import com.fc.v2.service.impl.SysStreetService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

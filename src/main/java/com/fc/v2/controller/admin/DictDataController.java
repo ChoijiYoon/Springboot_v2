@@ -1,5 +1,6 @@
 package com.fc.v2.controller.admin;
 
+import com.fc.v2.service.SysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,7 @@ import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.model.auto.TSysDictData;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.SysDictDataService;
-import com.fc.v2.service.SysDictTypeService;
+import com.fc.v2.service.impl.SysDictTypeService;
 import com.github.pagehelper.PageInfo;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;

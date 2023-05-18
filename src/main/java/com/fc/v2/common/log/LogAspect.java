@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 import com.fc.v2.model.auto.TsysOperLog;
 import com.fc.v2.model.auto.TsysUser;
 import com.fc.v2.satoken.SaTokenUtil;
-import com.fc.v2.service.SysOperLogService;
+import com.fc.v2.service.impl.SysOperLogService;
 import com.fc.v2.util.ServletUtils;
 import com.fc.v2.util.StringUtils;
 import com.google.gson.Gson;

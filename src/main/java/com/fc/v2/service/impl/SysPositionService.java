@@ -1,4 +1,4 @@
-package com.fc.v2.service;
+package com.fc.v2.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.fc.v2.common.base.BaseService;

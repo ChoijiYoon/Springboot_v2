@@ -9,6 +9,8 @@ import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.fc.v2.service.DictService;
+import com.fc.v2.service.GeneratorService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +32,7 @@ import com.fc.v2.model.custom.autocode.AutoConfigModel;
 import com.fc.v2.model.custom.autocode.AutoDictType;
 import com.fc.v2.model.custom.autocode.BeanColumn;
 import com.fc.v2.model.custom.autocode.TableInfo;
-import com.fc.v2.service.DictService;
-import com.fc.v2.service.GeneratorService;
-import com.fc.v2.service.SysDictTypeService;
+import com.fc.v2.service.impl.SysDictTypeService;
 import com.fc.v2.util.AutoCode.AutoCodeUtil;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
@@ -61,12 +61,12 @@ public class AutoCodeController extends BaseController {
 	private SysDictTypeService tSysDictTypeService;
 	
 	@Autowired
-	private DictService dictService; 
+	private DictService dictService;
 
 	/**
 	 * 代码自动生成全局配置
 	 * 
-	 * @param model
+	 * @param modelMap
 	 * @return
 	 * @author fuce
 	 * @Date 2019年8月13日 上午12:34:30

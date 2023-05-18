@@ -1,4 +1,4 @@
-package com.fc.v2.service;
+package com.fc.v2.service.impl;
 
 import java.util.Date;
 import java.util.List;

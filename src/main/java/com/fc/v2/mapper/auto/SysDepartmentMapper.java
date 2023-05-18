@@ -3,6 +3,7 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.SysDepartment;
 import com.fc.v2.model.auto.SysDepartmentExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @email 115889198@qq.com
  * @date 2020-04-17 13:12:58
  */
+@Repository
 public interface SysDepartmentMapper {
       	   	      	      	      	      	      	      	      	      
     long countByExample(SysDepartmentExample example);

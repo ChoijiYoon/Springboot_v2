@@ -5,7 +5,7 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.auto.TSysDictType;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.SysDictTypeService;
+import com.fc.v2.service.impl.SysDictTypeService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

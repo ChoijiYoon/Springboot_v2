@@ -23,7 +23,7 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.model.auto.SysFile;
 import com.fc.v2.model.auto.TsysUser;
 import com.fc.v2.satoken.SaTokenUtil;
-import com.fc.v2.service.SysFileService;
+import com.fc.v2.service.impl.SysFileService;
 import com.fc.v2.util.SnowflakeIdWorker;
 import cn.hutool.crypto.digest.MD5;
 

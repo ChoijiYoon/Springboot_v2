@@ -2,6 +2,9 @@ package com.fc.v2.mapper.auto;
 
 import com.fc.v2.model.custom.TsysTables;
 import com.fc.v2.model.custom.autocode.BeanColumn;
+import org.mapstruct.Mapper;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import java.util.Map;
 * @date 2019年5月9日 上午12:31:13 
 * @version V1.0   
  */
+@Repository
 public interface GeneratorMapper {
 	/**
 	 * 查询当前所有表

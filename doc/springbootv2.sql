@@ -1084,3 +1084,13 @@ INSERT INTO `t_test` VALUES ('457067196175224832', 'guest', 1, '3', '2021-01-02 
 INSERT INTO `t_test` VALUES ('457067220279889920', 'helloword', 1, '3', '2021-01-03 16:00:00', '2021-01-25 16:00:00', '');
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+CREATE TABLE `us_message_history` (
+                                      `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
+                                      `content` varchar(4096) DEFAULT NULL,
+                                      `create_time` int(10) DEFAULT NULL,
+                                      `user_id` int(10) DEFAULT NULL,
+                                      PRIMARY KEY (`id`),
+                                      KEY `idx_user_id` (`user_id`) USING BTREE COMMENT '用户id索引'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户对话历史记录';

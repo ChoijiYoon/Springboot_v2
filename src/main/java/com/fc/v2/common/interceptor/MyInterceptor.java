@@ -6,7 +6,7 @@ import com.fc.v2.common.exception.demo.DemoModeException;
 import com.fc.v2.common.spring.SpringUtils;
 import com.fc.v2.model.auto.SysInterUrl;
 import com.fc.v2.model.auto.SysInterUrlExample;
-import com.fc.v2.service.SysInterUrlService;
+import com.fc.v2.service.impl.SysInterUrlService;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;

@@ -10,7 +10,7 @@ import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.model.auto.SysProvince;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.SysProvinceService;
+import com.fc.v2.service.impl.SysProvinceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

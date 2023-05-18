@@ -5,7 +5,7 @@ import com.fc.v2.common.conf.V2Config;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResuTree;
 import com.fc.v2.common.domain.ResultTable;
-import com.fc.v2.service.*;
+import com.fc.v2.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class BaseController
 	
 	//系统角色
 	@Autowired
-	public SysRoleService sysRoleService; 
+	public SysRoleService sysRoleService;
 	
 	//权限
 	@Autowired

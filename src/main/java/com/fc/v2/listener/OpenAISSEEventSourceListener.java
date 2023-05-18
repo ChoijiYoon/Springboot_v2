@@ -55,7 +55,7 @@ public class OpenAISSEEventSourceListener extends EventSourceListener {
                     .id("[DONE]")
                     .data("[DONE]")
                     .reconnectTime(3000));
-            // 传输完成后自动关闭sse
+            // 之前逻辑, 传输完成后自动关闭sse
             sseEmitter.complete();
             return;
         }
@@ -68,6 +68,28 @@ public class OpenAISSEEventSourceListener extends EventSourceListener {
                     .reconnectTime(3000));
         } catch (Exception e) {
             log.error("sse信息推送失败！");
+            // 推送消息失败，记录错误日志，进行重推
+            log.error("SseEmitterServiceImpl[sendMsgToClient]: 推送消息失败：{},尝试进行重推", data, e);
+            boolean isSuccess = true;
+            // 推送消息失败后，每隔10s推送一次，推送5次
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(10000);
+                    if (sseEmitter == null) {
+                        log.error("SseEmitterServiceImpl[sendMsgToClient]：{}的第{}次消息重推失败，未创建长链接", id, i + 1);
+                        continue;
+                    }
+                    sseEmitter.send(SseEmitter.event()
+                            .id(completionResponse.getId())
+                            .data(completionResponse.getChoices().get(0).getDelta())
+                            .reconnectTime(3000));
+                } catch (Exception ex) {
+                    log.error("SseEmitterServiceImpl[sendMsgToClient]：{}的第{}次消息重推失败", id, i + 1, ex);
+                    continue;
+                }
+                log.info("SseEmitterServiceImpl[sendMsgToClient]：{}的第{}次消息重推成功,{}", id, i + 1, data);
+                return;
+            }
             eventSource.cancel();
             e.printStackTrace();
         }

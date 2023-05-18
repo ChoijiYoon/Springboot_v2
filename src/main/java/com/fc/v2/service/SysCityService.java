@@ -1,127 +1,46 @@
 package com.fc.v2.service;
 
-import com.fc.v2.common.support.ConvertUtil;
-import com.fc.v2.mapper.auto.SysCityMapper;
 import com.fc.v2.model.auto.SysCity;
 import com.fc.v2.model.auto.SysCityExample;
+import com.fc.v2.model.auto.TSysDictData;
+import com.fc.v2.model.auto.TSysDictType;
 import com.fc.v2.model.custom.Tablepar;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * 城市设置 SysCityService
- * @Title: SysCityService.java
- * @Package com.fc.v2.service
- * @author fuce_自动生成
- * @email 115889198@qq.com
- * @date 2019-10-04 21:15:13
- **/
-@Service
-public class SysCityService {
-	@Autowired
-	private SysCityMapper sysCityMapper;
-	
-      	   	      	      	      	      	      	      	      	      	      	      	      	      	
-	/**
-	 * 分页查询
-	 * @param pageNum
-	 * @param pageSize
-	 * @return
-	 */
-	 public PageInfo<SysCity> list(Tablepar tablepar,String name){
-	        SysCityExample testExample=new SysCityExample();
-	        testExample.setOrderByClause("id ASC");
-	        if(name!=null&&!"".equals(name)){
-	        	testExample.createCriteria().andCityNameLike("%"+name+"%");
-	        }
+ * 描述：
+ *
+ * @author https:www.unfbx.com
+ * @date 2023-04-08
+ */
+public interface SysCityService {
+    /**
+     * 分页查询
+     * @param tablepar
+     * @param name
+     * @return
+     */
+    PageInfo<SysCity> list(Tablepar tablepar, String name);
 
-	        PageHelper.startPage(tablepar.getPage(), tablepar.getLimit());
-	        List<SysCity> list= sysCityMapper.selectByExample(testExample);
-	        PageInfo<SysCity> pageInfo = new PageInfo<SysCity>(list);
-	        return  pageInfo;
-	 }
+    int deleteByPrimaryKey(String ids);
 
-	
-	public int deleteByPrimaryKey(String ids) {
-		Integer[] integers = ConvertUtil.toIntArray(",", ids);
-		List<Integer> stringB = Arrays.asList(integers);
-		SysCityExample example=new SysCityExample();
-		example.createCriteria().andIdIn(stringB);
-		return sysCityMapper.deleteByExample(example);
-	}
-	
-	
-	
-	public SysCity selectByPrimaryKey(Integer id) {
-		return sysCityMapper.selectByPrimaryKey(id);
-	}
+    SysCity selectByPrimaryKey(Integer id);
 
-	
-	
-	public int updateByPrimaryKeySelective(SysCity record) {
-		return sysCityMapper.updateByPrimaryKeySelective(record);
-	}
-	
-	/**
-	 * 添加
-	 */
-	
-	public int insertSelective(SysCity record) {
-		//添加雪花主键id
-		record.setId(null);
-		return sysCityMapper.insertSelective(record);
-	}
-	
-	
-	
-	public int updateByExampleSelective(SysCity record, SysCityExample example) {
-		
-		return sysCityMapper.updateByExampleSelective(record, example);
-	}
+    int updateByPrimaryKeySelective(SysCity record);
 
-	
-	
-	public int updateByExample(SysCity record, SysCityExample example) {
-		
-		return sysCityMapper.updateByExample(record, example);
-	}
+    int insertSelective(SysCity record);
 
-	
-	public List<SysCity> selectByExample(SysCityExample example) {
-		
-		return sysCityMapper.selectByExample(example);
-	}
+    int updateByExampleSelective(SysCity record, SysCityExample example);
 
-	
-	
-	public long countByExample(SysCityExample example) {
-		
-		return sysCityMapper.countByExample(example);
-	}
+    int updateByExample(SysCity record, SysCityExample example);
 
-	
-	
-	public int deleteByExample(SysCityExample example) {
-		
-		return sysCityMapper.deleteByExample(example);
-	}
-	
-	/**
-	 * 检查name
-	 * @param sysCity
-	 * @return
-	 */
-	public int checkNameUnique(SysCity sysCity){
-		SysCityExample example=new SysCityExample();
-		example.createCriteria().andCityNameEqualTo(sysCity.getCityName());
-		List<SysCity> list=sysCityMapper.selectByExample(example);
-		return list.size();
-	}
+    List<SysCity> selectByExample(SysCityExample example);
 
+    long countByExample(SysCityExample example);
 
+    int deleteByExample(SysCityExample example);
+
+    int checkNameUnique(SysCity sysCity);
 }

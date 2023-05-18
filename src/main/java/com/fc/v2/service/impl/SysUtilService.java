@@ -1,4 +1,4 @@
-package com.fc.v2.service;
+package com.fc.v2.service.impl;
 
 import com.fc.v2.mapper.custom.SysUtilDao;
 import com.fc.v2.model.custom.SQLAdapter;

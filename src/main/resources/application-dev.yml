@@ -7,13 +7,13 @@ spring:
     druid:
      #主库数据源
      master:
-        url: jdbc:mysql://localhost:3306/springbootv2?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT
+        url: jdbc:mysql://localhost:3306/saber?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT
         username: root
         password: root
      #备数据源 #关闭
      slave:
         enabled: false
-        url: jdbc:mysql://localhost:3306/springbootv3?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&autoReconnect=true&useSSL=false
+        url: jdbc:mysql://localhost:3306/saber?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&autoReconnect=true&useSSL=false
         username: root
         password: root
         #配置初始化连接数大小
@@ -105,3 +105,11 @@ spring:
 #      wall:
 #        config:
 #          multi-statement-allow: true
+
+#chatGpt
+chatgpt:
+  #多个key英文逗号分割
+  apiKey: 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
+  #默认https://api.openai.com，如有自定义代理host，填写自定义代理host
+  # 自定义代理host教程看https://github.com/Grt1228/chatgpt-java   ReadMe
+  apiHost: https://api.openai-proxy.com/

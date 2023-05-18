@@ -37,6 +37,7 @@ server :
     threads:
       max: 128
       min-spare: 5
+
 spring :
   # 环境 dev|test|prod
   profiles :
@@ -88,6 +89,10 @@ spring :
         max-wait: -1
         max-idle: 10
         min-idle: 0
+  #静态文件地址
+  web:
+    resources:
+      static-locations: classpath:/static/, classpath:/templates/
 #mybatis:
 #  #配置mapper的扫描，找到所有的mapper.xml映射文件
 #  mapperLocations : classpath*:mybatis/*/*.xml
@@ -112,3 +117,28 @@ oss:
   access-key: minioadmin  # 上文创建的AK
   secret-key: minioadmin # 上文创建的SK
   bucket-name: v2-cloud  # 上文创建的桶名称
+
+############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: satoken
+  # token有效期，单位s 默认30天, -1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: true
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+
+#chatGpt
+chatgpt:
+  #多个key英文逗号分割
+  apiKey: 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
+  #默认https://api.openai.com，如有自定义代理host，填写自定义代理host
+  # 自定义代理host教程看https://github.com/Grt1228/chatgpt-java   ReadMe
+  apiHost: https://api.openai-proxy.com/

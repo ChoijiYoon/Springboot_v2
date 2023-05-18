@@ -1,12 +1,19 @@
-package com.fc.v2.controller;
+package com.fc.v2.controller.saber;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.stp.StpUtil;
+import com.fc.v2.common.base.BaseController;
+import com.fc.v2.common.domain.AjaxResult;
+import com.fc.v2.mapper.custom.TsysUserDao;
+import com.fc.v2.model.auto.SysNotice;
+import com.fc.v2.model.auto.TsysUser;
+import com.fc.v2.model.custom.SysMenu;
+import com.fc.v2.satoken.SaTokenUtil;
+import com.fc.v2.util.ServletUtils;
+import com.fc.v2.util.StringUtils;
+import com.wf.captcha.utils.CaptchaUtil;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,36 +25,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fc.v2.common.base.BaseController;
-import com.fc.v2.common.domain.AjaxResult;
-import com.fc.v2.mapper.custom.TsysUserDao;
-import com.fc.v2.model.auto.SysNotice;
-import com.fc.v2.model.auto.TsysUser;
-import com.fc.v2.model.custom.SysMenu;
-import com.fc.v2.satoken.SaTokenUtil;
-import com.fc.v2.util.ServletUtils;
-import com.fc.v2.util.StringUtils;
-import com.wf.captcha.utils.CaptchaUtil;
-
-import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.secure.SaSecureUtil;
-import cn.dev33.satoken.stp.StpUtil;
-import io.swagger.annotations.ApiOperation;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 后台方法
+ * 赛博方法
  * 
- * @ClassName: HomeController
- * @author fuce
- * @date 2019-10-21 00:10
+ * @ClassName: SaberLoginController
+ * @author cgy
+ * @date 2023年5月18日11:08:48
  *
  */
 @Controller
-@RequestMapping("/admin")
-public class AdminController extends BaseController {
-	private static Logger logger = LoggerFactory.getLogger(AdminController.class);
+@RequestMapping("/saber")
+public class SaberLoginController extends BaseController {
+	private static Logger logger = LoggerFactory.getLogger(SaberLoginController.class);
 
-	private String prefix = "admin";
+	/**
+	 *
+	 */
+	private final String prefix = "saber";
 	
 	@Autowired
 	private TsysUserDao tsysUserDao;
@@ -117,8 +117,7 @@ public class AdminController extends BaseController {
 	public AjaxResult login(TsysUser user, String captcha, RedirectAttributes redirectAttributes, boolean rememberMe,
 			HttpServletRequest request) {
 		// ModelAndView view =new ModelAndView();
-		//TODO
-		Boolean yz = true;
+		Boolean yz = false;
 		// 获取session中的验证码
 		String verCode = (String) request.getSession().getAttribute("captcha");
 		 // 判断验证码
@@ -127,7 +126,6 @@ public class AdminController extends BaseController {
 			CaptchaUtil.clear(request);  // 清除session中的验证码
 			yz=true;
 		}
-
 		
 		// 判断验证码
 		if (yz) {

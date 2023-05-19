@@ -3,6 +3,7 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.SysNoticeUser;
 import com.fc.v2.model.auto.SysNoticeUserExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @email 115889198@qq.com
  * @date 2019-09-08 02:12:54
  */
+@Repository
 public interface SysNoticeUserMapper {
       	      	   	      	   	      	   	      
     long countByExample(SysNoticeUserExample example);

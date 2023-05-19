@@ -3,6 +3,7 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.SysStreet;
 import com.fc.v2.model.auto.SysStreetExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @email 115889198@qq.com
  * @date 2019-10-05 01:02:28
  */
+@Repository
 public interface SysStreetMapper {
       	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      
     long countByExample(SysStreetExample example);

@@ -6,7 +6,7 @@ import com.fc.v2.common.exception.demo.DemoModeException;
 import com.fc.v2.common.spring.SpringUtils;
 import com.fc.v2.model.auto.SysInterUrl;
 import com.fc.v2.model.auto.SysInterUrlExample;
-import com.fc.v2.service.impl.SysInterUrlService;
+import com.fc.v2.service.system.SysInterUrlService;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class MyInterceptor  implements HandlerInterceptor {
 	/**需要被拦截的post请求url**/
 	public static List<SysInterUrl> posturllist=new ArrayList<SysInterUrl>();
 	/**注入拦截器表的service**/
-	public static  SysInterUrlService interUrlService= SpringUtils.getBean(SysInterUrlService.class);
+	public static SysInterUrlService interUrlService= SpringUtils.getBean(SysInterUrlService.class);
 	/**
 	 * 初始化静态块，避免多次创建调用
 	 * 需要拦截的请求集合

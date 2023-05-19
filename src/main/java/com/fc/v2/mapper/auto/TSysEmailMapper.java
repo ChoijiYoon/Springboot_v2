@@ -3,9 +3,11 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.TSysEmail;
 import com.fc.v2.model.auto.TSysEmailExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TSysEmailMapper {
     long countByExample(TSysEmailExample example);
 

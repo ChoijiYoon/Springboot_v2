@@ -1,6 +1,15 @@
 package com.fc.v2.listener;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fc.v2.common.spring.SpringUtils;
+import com.fc.v2.model.message.UserMessageHistory;
+import com.fc.v2.service.message.UserMessageHistoryService;
+import com.fc.v2.service.system.SysInterUrlService;
+import com.fc.v2.util.DateUtils;
+import com.fc.v2.util.StringUtils;
 import com.unfbx.chatgpt.entity.chat.ChatCompletionResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +17,11 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.sse.EventSource;
 import okhttp3.sse.EventSourceListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,11 +36,15 @@ public class OpenAISSEEventSourceListener extends EventSourceListener {
     private long tokens;
 
     private SseEmitter sseEmitter;
+    private Long userId;
+    public static UserMessageHistoryService userMessageHistoryService= SpringUtils.getBean(UserMessageHistoryService.class);
 
-    public OpenAISSEEventSourceListener(SseEmitter sseEmitter) {
+    public OpenAISSEEventSourceListener(SseEmitter sseEmitter, Long userId) {
         this.sseEmitter = sseEmitter;
+        this.userId = userId;
     }
 
+    private Map<Long, String> msgMap = new HashMap<>();
     /**
      * {@inheritDoc}
      */
@@ -57,8 +73,35 @@ public class OpenAISSEEventSourceListener extends EventSourceListener {
                     .reconnectTime(3000));
             // 之前逻辑, 传输完成后自动关闭sse
             sseEmitter.complete();
+            String msgData = msgMap.get(userId);
+            if (StringUtils.isNotEmpty(msgData)) {
+                UserMessageHistory userMessageHistory = new UserMessageHistory();
+                userMessageHistory.setType(1);
+                userMessageHistory.setContent(msgData);
+                userMessageHistory.setUserId(userId);
+                userMessageHistory.setCreateTime(DateUtils.getTenLengthTime());
+                userMessageHistoryService.save(userMessageHistory);
+            }
             return;
         }
+        JSONObject jsonObject1 = JSON.parseObject(data);
+        JSONArray jsonObject = jsonObject1.getJSONArray("choices");
+        log.info("jsonObject1：{}", jsonObject);
+        JSONObject delta1 = jsonObject.getJSONObject(0);
+        log.info("delta1：{}", delta1);
+        JSONObject delta = delta1.getJSONObject("delta");
+        Object content1 = delta.get("content");
+        if (content1 != null) {
+            String content = content1 + "";
+            String msg = msgMap.get(userId);
+            if (StringUtils.isEmpty(msg)) {
+                msgMap.put(userId, content);
+            } else {
+                msg = msg + content;
+                msgMap.put(userId, msg);
+            }
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         ChatCompletionResponse completionResponse = mapper.readValue(data, ChatCompletionResponse.class); // 读取Json
         try {

@@ -9,9 +9,12 @@ import java.util.HashMap;
 * @date 2018年8月18日
 *
  */
-public class AjaxResult extends HashMap<String, Object>
-{
+public class AjaxResult extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
+
+    public static final Integer SUCCESS_CODE = 200;
+
+    public static final Integer FAIL_CODE = 500;
 
     /**
      * 初始化一个新创建的 Message 对象

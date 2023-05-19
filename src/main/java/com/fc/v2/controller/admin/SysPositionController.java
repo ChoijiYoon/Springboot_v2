@@ -5,7 +5,7 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.auto.SysPosition;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.impl.SysPositionService;
+import com.fc.v2.service.system.SysPositionService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

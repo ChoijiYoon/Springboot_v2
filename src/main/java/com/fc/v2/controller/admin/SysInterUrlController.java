@@ -2,6 +2,7 @@ package com.fc.v2.controller.admin;
 
 import com.fc.v2.common.domain.ResultTable;
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import com.fc.v2.service.system.SysInterUrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +12,6 @@ import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.model.auto.SysInterUrl;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.impl.SysInterUrlService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

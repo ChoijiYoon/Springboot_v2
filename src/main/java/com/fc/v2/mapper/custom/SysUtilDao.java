@@ -1,6 +1,7 @@
 package com.fc.v2.mapper.custom;
 
 import com.fc.v2.model.custom.SQLAdapter;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
 * @date 2019-08-31 18:11
 *
  */
+@Repository
 public interface SysUtilDao {
 	
 	/**

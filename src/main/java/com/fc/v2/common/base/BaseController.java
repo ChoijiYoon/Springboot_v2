@@ -5,7 +5,7 @@ import com.fc.v2.common.conf.V2Config;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResuTree;
 import com.fc.v2.common.domain.ResultTable;
-import com.fc.v2.service.impl.*;
+import com.fc.v2.service.system.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;

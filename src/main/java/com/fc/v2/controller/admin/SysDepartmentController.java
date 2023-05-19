@@ -7,7 +7,7 @@ import com.fc.v2.model.auto.SysDepartment;
 import com.fc.v2.model.auto.SysDepartmentExample;
 import com.fc.v2.model.custom.Tablepar;
 import com.fc.v2.common.domain.ResuTree;
-import com.fc.v2.service.SysDepartmentService;
+import com.fc.v2.service.system.SysDepartmentService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

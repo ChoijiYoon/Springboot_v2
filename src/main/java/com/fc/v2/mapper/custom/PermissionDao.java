@@ -1,9 +1,11 @@
 package com.fc.v2.mapper.custom;
 
 import com.fc.v2.model.auto.TsysPermission;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface  PermissionDao {
 	/**
 	 * 查询全部权限 

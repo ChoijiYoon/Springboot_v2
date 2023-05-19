@@ -2,13 +2,19 @@ package com.fc.v2.controller.admin;
 
 import cn.hutool.core.util.StrUtil;
 import com.fc.v2.common.base.BaseController;
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.controller.request.ChatRequest;
 import com.fc.v2.controller.response.ChatResponse;
-import com.fc.v2.service.SseService;
+import com.fc.v2.model.auto.TsysUser;
+import com.fc.v2.satoken.SaTokenUtil;
+import com.fc.v2.service.system.SseService;
+import com.fc.v2.util.StringUtils;
 import com.unfbx.chatgpt.exception.BaseException;
 import com.unfbx.chatgpt.exception.CommonError;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.loadtime.Aj;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -29,11 +35,8 @@ import java.util.Map;
 @RequestMapping("/captcha")
 public class ChatController extends BaseController {
 
-    private final SseService sseService;
-
-    public ChatController(SseService sseService) {
-        this.sseService = sseService;
-    }
+    @Autowired
+    private SseService sseService;
 
     /**
      * 创建sse连接
@@ -44,7 +47,11 @@ public class ChatController extends BaseController {
     @CrossOrigin
     @GetMapping("/createSse")
     public SseEmitter createConnect(@RequestHeader Map<String, String> headers) {
-        String uid = getUid(headers);
+        TsysUser user = SaTokenUtil.getUser();
+        if (user == null || StringUtils.isEmpty(user.getId())) {
+            return null;
+        }
+        String uid = user.getId();
         return sseService.createSse(uid);
     }
 
@@ -57,9 +64,13 @@ public class ChatController extends BaseController {
     @CrossOrigin
     @PostMapping("/chat")
     @ResponseBody
-    public ChatResponse sseChat(@RequestBody ChatRequest chatRequest, @RequestHeader Map<String, String> headers, HttpServletResponse response) {
-        String uid = getUid(headers);
-        return sseService.sseChat(uid, chatRequest);
+    public AjaxResult sseChat(@RequestBody ChatRequest chatRequest, @RequestHeader Map<String, String> headers, HttpServletResponse response) {
+        TsysUser user = SaTokenUtil.getUser();
+        if (user == null || StringUtils.isEmpty(user.getId())) {
+            return AjaxResult.error("用户未登录");
+        }
+        String uid = user.getId();
+        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.sseChat(uid, chatRequest));
     }
 
     /**
@@ -69,9 +80,14 @@ public class ChatController extends BaseController {
      */
     @CrossOrigin
     @GetMapping("/closeSse")
-    public void closeConnect(@RequestHeader Map<String, String> headers) {
-        String uid = getUid(headers);
-        sseService.closeSse(uid);
+    public AjaxResult closeConnect(@RequestHeader Map<String, String> headers) {
+        TsysUser user = SaTokenUtil.getUser();
+        if (user == null || StringUtils.isEmpty(user.getId())) {
+            return AjaxResult.error("用户未登录");
+        }
+        String uid = user.getId();
+
+        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.closeSse(uid));
     }
 
     @GetMapping("")

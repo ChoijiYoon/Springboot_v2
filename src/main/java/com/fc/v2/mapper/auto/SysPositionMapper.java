@@ -3,6 +3,7 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.SysPosition;
 import com.fc.v2.model.auto.SysPositionExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
  * @email 115889198@qq.com
  * @date 2020-04-16 23:46:24
  */
+
+@Repository
 public interface SysPositionMapper {
       	   	      	      	      	      
     long countByExample(SysPositionExample example);

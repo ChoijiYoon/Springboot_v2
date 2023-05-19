@@ -5,7 +5,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import com.fc.v2.common.spring.SpringUtils;
 import com.fc.v2.model.auto.SysQuartzJob;
 import com.fc.v2.model.auto.SysQuartzJobLog;
-import com.fc.v2.service.impl.SysQuartzJobLogService;
+import com.fc.v2.service.system.SysQuartzJobLogService;
 import com.fc.v2.util.StringUtils;
 
 import org.quartz.Job;

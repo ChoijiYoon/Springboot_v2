@@ -2,10 +2,10 @@ package com.fc.v2.controller.admin;
 
 import com.fc.v2.common.base.BaseController;
 import com.fc.v2.model.auto.*;
-import com.fc.v2.service.SysAreaService;
-import com.fc.v2.service.SysCityService;
-import com.fc.v2.service.impl.SysProvinceService;
-import com.fc.v2.service.impl.SysStreetService;
+import com.fc.v2.service.system.SysAreaService;
+import com.fc.v2.service.system.SysCityService;
+import com.fc.v2.service.system.SysProvinceService;
+import com.fc.v2.service.system.SysStreetService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,6 @@ public class ProvinceLinkageController  extends BaseController{
 	/**
 	 * 分页list页面
 	 * @param model
-	 * @param dictId
 	 * @return
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")

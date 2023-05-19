@@ -1,6 +1,8 @@
 package com.fc.v2.mapper.custom;
 
 import com.fc.v2.model.auto.TsysRole;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,7 @@ import java.util.List;
  * @date 2018年8月25日
  *
  */
+@Repository
 public interface RoleDao {
 	/**
 	 * 根据用户id查询角色

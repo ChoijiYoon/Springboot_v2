@@ -84,7 +84,7 @@ public class PermissionController  extends BaseController{
 	
     /**
      * 权限添加
-     * @param role
+     * @param tsysPermission
      * @return
      */
 	//@Log(title = "权限添加", action = "1")
@@ -143,7 +143,7 @@ public class PermissionController  extends BaseController{
 	
 	/**
 	 * 检查权限URL
-	 * @param tsysUser
+	 * @param tsysPermission
 	 * @return
 	 */
 	@ApiOperation(value = "检查权限URL", notes = "检查权限URL")
@@ -160,7 +160,7 @@ public class PermissionController  extends BaseController{
 	
 	/**
 	 * 检查权限perms字段
-	 * @param tsysUser
+	 * @param tsysPermission
 	 * @return
 	 */
 	@ApiOperation(value = "检查权限perms字段", notes = "检查权限perms字段")

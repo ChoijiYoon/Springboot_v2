@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fc.v2.service.system.SysFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,7 +25,6 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.model.auto.SysFile;
 import com.fc.v2.model.auto.TsysUser;
 import com.fc.v2.satoken.SaTokenUtil;
-import com.fc.v2.service.impl.SysFileService;
 import com.fc.v2.util.SnowflakeIdWorker;
 import cn.hutool.crypto.digest.MD5;
 

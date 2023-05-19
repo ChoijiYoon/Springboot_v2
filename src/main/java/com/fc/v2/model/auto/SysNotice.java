@@ -124,7 +124,7 @@ public class SysNotice implements Serializable {
      * @return YYYY_MM_DD
      */
 	public String getdate(){
-       return  DateUtils.dateTime(this.createTime);
+       return  DateUtils.format(this.createTime);
     }
 	
 }

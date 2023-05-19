@@ -9,8 +9,9 @@ import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.fc.v2.service.DictService;
-import com.fc.v2.service.GeneratorService;
+import com.fc.v2.service.system.DictService;
+import com.fc.v2.service.system.GeneratorService;
+import com.fc.v2.service.system.SysDictTypeService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,6 @@ import com.fc.v2.model.custom.autocode.AutoConfigModel;
 import com.fc.v2.model.custom.autocode.AutoDictType;
 import com.fc.v2.model.custom.autocode.BeanColumn;
 import com.fc.v2.model.custom.autocode.TableInfo;
-import com.fc.v2.service.impl.SysDictTypeService;
 import com.fc.v2.util.AutoCode.AutoCodeUtil;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;

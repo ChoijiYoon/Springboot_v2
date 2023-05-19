@@ -79,7 +79,7 @@ public class AdminController extends BaseController {
 	/**
 	 * 请求到登陆界面
 	 * 
-	 * @param request
+	 * @param modelMap
 	 * @return
 	 */
 	@ApiOperation(value = "请求到登陆界面", notes = "请求到登陆界面")
@@ -102,15 +102,17 @@ public class AdminController extends BaseController {
 
 	/**
 	 * 用户登陆验证
-	 * 
+	 * @Author cgy
+	 * @Date 13:49 2023/5/19
+	 * @Param
 	 * @param user
-	 * @param rcode
+	 * @param captcha
 	 * @param redirectAttributes
 	 * @param rememberMe
-	 * @param model
 	 * @param request
 	 * @return
-	 */
+	 * @return com.fc.v2.common.domain.AjaxResult
+	 **/
 	@ApiOperation(value = "用户登陆验证", notes = "用户登陆验证")
 	@PostMapping("/login")
 	@ResponseBody
@@ -169,14 +171,15 @@ public class AdminController extends BaseController {
 	
 	/**
 	 * 手机登录
+	 * @Author cgy
+	 * @Date 13:49 2023/5/19
+	 * @Param
 	 * @param user
-	 * @param redirectAttributes
 	 * @param rememberMe
 	 * @param request
 	 * @return
-	 * @author fuce
-	 * @Date 2020年12月7日 上午12:54:28
-	 */
+	 * @return com.fc.v2.common.domain.AjaxResult
+	 **/
 	@ApiOperation(value = "手机登录", notes = "手机登录")
 	@PostMapping("/API/login")
 	@ResponseBody

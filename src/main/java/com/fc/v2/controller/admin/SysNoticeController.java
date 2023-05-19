@@ -1,5 +1,6 @@
  package com.fc.v2.controller.admin;
 
+import com.fc.v2.service.system.SysNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +17,6 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.auto.SysNotice;
 import com.fc.v2.model.custom.Tablepar;
 import com.fc.v2.satoken.SaTokenUtil;
-import com.fc.v2.service.impl.SysNoticeService;
 import com.github.pagehelper.PageInfo;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
@@ -67,7 +67,7 @@ public class SysNoticeController extends BaseController{
 	@SaCheckPermission("gen:sysNotice:list")
 	@ResponseBody
 	public ResultTable list(Tablepar tablepar, String searchText){
-		PageInfo<SysNotice> page=sysNoticeService.list(tablepar,searchText) ; 
+		PageInfo<SysNotice> page=sysNoticeService.list(tablepar,searchText) ;
 		return pageTable(page.getList(),page.getTotal());
 	}
 	
@@ -153,7 +153,7 @@ public class SysNoticeController extends BaseController{
 	
 	/**
 	 * 检查
-	 * @param tsysUser
+	 * @param sysNotice
 	 * @return
 	 */
 	@ApiOperation(value = "检查Name唯一", notes = "检查Name唯一")

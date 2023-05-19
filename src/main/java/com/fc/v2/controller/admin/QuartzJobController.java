@@ -5,7 +5,7 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.auto.SysQuartzJob;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.service.impl.SysQuartzJobService;
+import com.fc.v2.service.system.SysQuartzJobService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

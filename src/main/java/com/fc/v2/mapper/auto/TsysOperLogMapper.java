@@ -3,9 +3,11 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.TsysOperLog;
 import com.fc.v2.model.auto.TsysOperLogExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TsysOperLogMapper {
     int countByExample(TsysOperLogExample example);
 

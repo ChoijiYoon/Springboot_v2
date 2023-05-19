@@ -2,7 +2,7 @@ package com.fc.v2.common.quartz;
 
 import com.fc.v2.model.auto.SysQuartzJob;
 import com.fc.v2.model.auto.SysQuartzJobExample;
-import com.fc.v2.service.impl.SysQuartzJobService;
+import com.fc.v2.service.system.SysQuartzJobService;
 import com.fc.v2.util.StringUtils;
 import org.quartz.*;
 import org.quartz.impl.JobDetailImpl;
@@ -26,7 +26,7 @@ public class QuartzSchedulerUtil {
     @Autowired
     private  Scheduler scheduler;
     @Autowired
-    private SysQuartzJobService sysQuartzJobService; 
+    private SysQuartzJobService sysQuartzJobService;
 
     //这个东西可以放在配置文件中
     //cron表达式 一分钟执行一次

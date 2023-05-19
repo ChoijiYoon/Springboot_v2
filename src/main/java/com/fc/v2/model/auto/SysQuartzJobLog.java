@@ -152,7 +152,7 @@ public class SysQuartzJobLog implements Serializable {
      * @return yyyy-MM-dd HH:mm:ss
      */
 	public String getdate(Date date){
-        return  DateUtils.parseDateToStr(DateUtils.DATE_TIME_PATTERN,date);
+        return DateUtils.format(date,DateUtils.E_DATE_TIME_SEC);
     }
 
 }

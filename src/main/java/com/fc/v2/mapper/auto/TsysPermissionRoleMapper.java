@@ -3,9 +3,11 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.auto.TsysPermissionRole;
 import com.fc.v2.model.auto.TsysPermissionRoleExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TsysPermissionRoleMapper {
     int countByExample(TsysPermissionRoleExample example);
 

@@ -88,7 +88,7 @@ public class TsysOperLog {
     }
 
     public String getdate(){
-       return  DateUtils.dateTime(this.operTime);
+       return  DateUtils.format(this.operTime, DateUtils.E_DATE_TIME_SEC);
     }
 
 }

@@ -108,6 +108,7 @@ public class OpenAIWebSocketEventSourceListener extends EventSourceListener {
         } else {
             log.error("OpenAI  sse连接异常data：{}，异常：{}", response, t);
         }
+        session.getBasicRemote().sendText("sse连接异常data", false);
         eventSource.cancel();
     }
 }

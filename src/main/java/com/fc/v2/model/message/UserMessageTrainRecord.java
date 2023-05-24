@@ -34,6 +34,15 @@ public class UserMessageTrainRecord implements Serializable {
      */
     private Long editTime;
 
+    public UserMessageTrainRecord(String content, Long createTime, Long userId, Long editTime) {
+        this.content = content;
+        this.createTime = createTime;
+        this.userId = userId;
+        this.editTime = editTime;
+    }
+
+    public UserMessageTrainRecord() {
+    }
 
 
     public Long getId() {

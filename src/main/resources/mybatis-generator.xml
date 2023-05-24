@@ -67,7 +67,7 @@
         </javaClientGenerator>
        
 <!--         配置需要生成的表-->
-        <table tableName="us_message_train_record" domainObjectName="UserMessageHistory" enableCountByExample="true">
+        <table tableName="us_message_train_record" domainObjectName="UserMessageTrainRecord" enableCountByExample="true">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
          <!--<table tableName="t_sys_role" domainObjectName="TsysRole" enableCountByExample="true">

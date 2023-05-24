@@ -3,12 +3,15 @@ package com.fc.v2.service.system.impl;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
+import com.fc.v2.common.sakyamuni.SaberSakyamuniDrillEnum;
 import com.fc.v2.config.LocalCache;
 import com.fc.v2.controller.request.ChatRequest;
 import com.fc.v2.controller.response.ChatResponse;
 import com.fc.v2.listener.OpenAISSEEventSourceListener;
 import com.fc.v2.mapper.message.UserMessageHistoryMapper;
+import com.fc.v2.mapper.message.UserMessageTrainRecordMapper;
 import com.fc.v2.model.message.UserMessageHistory;
+import com.fc.v2.model.message.UserMessageTrainRecord;
 import com.fc.v2.service.message.UserMessageHistoryService;
 import com.fc.v2.service.system.SseService;
 import com.fc.v2.util.DateUtils;
@@ -39,6 +42,8 @@ public class SseServiceImpl implements SseService {
 
     @Autowired
     private UserMessageHistoryMapper userMessageHistoryMapper;
+    @Autowired
+    private UserMessageTrainRecordMapper trainRecordMapper;
 
     public SseServiceImpl(OpenAiStreamClient openAiStreamClient) {
         this.openAiStreamClient = openAiStreamClient;
@@ -99,20 +104,25 @@ public class SseServiceImpl implements SseService {
     @Override
     public ChatResponse sseChat(String uid, ChatRequest chatRequest) {
         if (StrUtil.isBlank(chatRequest.getMsg())) {
-            log.info("参数异常，msg为null", uid);
+            log.info("参数异常，msg为null uid:{}", uid);
             throw new BaseException("参数异常，msg不能为空~");
         }
-        String messageContext = (String) LocalCache.CACHE.get("msg" + uid);
+        //查询用户历史聊天key
         List<Message> messages = new ArrayList<>();
-        if (StrUtil.isNotBlank(messageContext)) {
+        UserMessageTrainRecord trainRecord = trainRecordMapper.getByUserId(Long.parseLong(uid));
+        if (trainRecord != null) {
+            String messageContext = trainRecord.getContent();
             JSONArray jsonArray = new JSONArray(messageContext);
             messages = JSONUtil.toList(jsonArray, Message.class);
-            if (messages.size() >= 10) {
+            //截取最近十条内容进行回复 暂不支持
+            /*if (messages.size() >= 10) {
                 messages = messages.subList(1, 10);
-            }
+            }*/
             Message currentMessage = Message.builder().content(chatRequest.getMsg()).role(Message.Role.USER).build();
             messages.add(currentMessage);
         } else {
+            Message systemMessage = Message.builder().content(SaberSakyamuniDrillEnum.ROLE.getContent()).role(Message.Role.SYSTEM).build();
+            messages.add(systemMessage);
             Message currentMessage = Message.builder().content(chatRequest.getMsg()).role(Message.Role.USER).build();
             messages.add(currentMessage);
         }
@@ -127,10 +137,17 @@ public class SseServiceImpl implements SseService {
         ChatCompletion completion = ChatCompletion
                 .builder()
                 .messages(messages)
+                .user(uid)
                 .model(ChatCompletion.Model.GPT_3_5_TURBO.getName())
                 .build();
         openAiStreamClient.streamChatCompletion(completion, openAIEventSourceListener);
-        LocalCache.CACHE.put("msg" + uid, JSONUtil.toJsonStr(messages), LocalCache.TIMEOUT);
+        if (trainRecord == null) {
+            trainRecordMapper.insert(new UserMessageTrainRecord(JSONUtil.toJsonStr(messages), DateUtils.getTenLengthTime(), Long.parseLong(uid), DateUtils.getTenLengthTime()));
+        } else {
+            trainRecord.setContent(JSONUtil.toJsonStr(messages));
+            trainRecord.setEditTime(DateUtils.getTenLengthTime());
+            trainRecordMapper.updateByPrimaryKey(trainRecord);
+        }
         //记录用户聊天消息
         UserMessageHistory userMessageHistory = new UserMessageHistory();
         userMessageHistory.setUserId(Long.parseLong(uid));

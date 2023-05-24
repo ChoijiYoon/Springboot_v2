@@ -158,7 +158,11 @@ public class OpenAISSEEventSourceListener extends EventSourceListener {
         } else {
             log.error("OpenAI  sse连接异常data：{}，异常：{}", response, t);
         }
-        eventSource.cancel();
+        sseEmitter.send(SseEmitter.event()
+                .id("error")
+                .data("连接异常")
+                .reconnectTime(3000));
+        sseEmitter.complete();
     }
 
     /**

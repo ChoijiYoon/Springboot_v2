@@ -74,6 +74,24 @@ public class ChatController extends BaseController {
     }
 
     /**
+     * 抽签
+     *
+     * @param chatRequest
+     * @param headers
+     */
+    @CrossOrigin
+    @PostMapping("/drawLots")
+    @ResponseBody
+    public AjaxResult drawLots(@RequestBody ChatRequest chatRequest, @RequestHeader Map<String, String> headers, HttpServletResponse response) {
+        TsysUser user = SaTokenUtil.getUser();
+        if (user == null || StringUtils.isEmpty(user.getId())) {
+            return AjaxResult.error("用户未登录");
+        }
+        String uid = user.getId();
+        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.sseChat(uid, chatRequest));
+    }
+
+    /**
      * 关闭连接
      *
      * @param headers

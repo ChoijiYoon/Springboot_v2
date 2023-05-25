@@ -3,6 +3,7 @@ package com.fc.v2.controller.admin;
 import cn.hutool.core.util.StrUtil;
 import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
+import com.fc.v2.common.sakyamuni.SaberTalkType;
 import com.fc.v2.controller.request.ChatRequest;
 import com.fc.v2.controller.response.ChatResponse;
 import com.fc.v2.model.auto.TsysUser;
@@ -70,7 +71,7 @@ public class ChatController extends BaseController {
             return AjaxResult.error("用户未登录");
         }
         String uid = user.getId();
-        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.sseChat(uid, chatRequest));
+        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.sseChat(uid, chatRequest, SaberTalkType.COMMON, null));
     }
 
     /**
@@ -88,7 +89,7 @@ public class ChatController extends BaseController {
             return AjaxResult.error("用户未登录");
         }
         String uid = user.getId();
-        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.sseChat(uid, chatRequest));
+        return AjaxResult.successData(AjaxResult.SUCCESS_CODE, sseService.sseChat(uid, chatRequest, SaberTalkType.SIGN, chatRequest.getSaberDrawLotsEnum()));
     }
 
     /**

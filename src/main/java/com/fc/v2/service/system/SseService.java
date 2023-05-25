@@ -1,5 +1,7 @@
 package com.fc.v2.service.system;
 
+import com.fc.v2.common.sakyamuni.SaberDrawLotsEnum;
+import com.fc.v2.common.sakyamuni.SaberTalkType;
 import com.fc.v2.controller.request.ChatRequest;
 import com.fc.v2.controller.response.ChatResponse;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -29,5 +31,5 @@ public interface SseService {
      * @param uid
      * @param chatRequest
      */
-    ChatResponse sseChat(String uid, ChatRequest chatRequest);
+    ChatResponse sseChat(String uid, ChatRequest chatRequest, SaberTalkType type, SaberDrawLotsEnum drawLotsEnum);
 }

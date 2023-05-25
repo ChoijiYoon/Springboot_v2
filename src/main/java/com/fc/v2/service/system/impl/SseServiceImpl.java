@@ -3,7 +3,10 @@ package com.fc.v2.service.system.impl;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
+import com.fc.v2.common.sakyamuni.SaberCustomDialogEnum;
+import com.fc.v2.common.sakyamuni.SaberDrawLotsEnum;
 import com.fc.v2.common.sakyamuni.SaberSakyamuniDrillEnum;
+import com.fc.v2.common.sakyamuni.SaberTalkType;
 import com.fc.v2.config.LocalCache;
 import com.fc.v2.controller.request.ChatRequest;
 import com.fc.v2.controller.response.ChatResponse;
@@ -102,29 +105,45 @@ public class SseServiceImpl implements SseService {
     }
 
     @Override
-    public ChatResponse sseChat(String uid, ChatRequest chatRequest) {
+    public ChatResponse sseChat(String uid, ChatRequest chatRequest, SaberTalkType type, SaberDrawLotsEnum drawLotsEnum) {
         if (StrUtil.isBlank(chatRequest.getMsg())) {
             log.info("参数异常，msg为null uid:{}", uid);
             throw new BaseException("参数异常，msg不能为空~");
         }
-        //查询用户历史聊天key
         List<Message> messages = new ArrayList<>();
         UserMessageTrainRecord trainRecord = trainRecordMapper.getByUserId(Long.parseLong(uid));
-        if (trainRecord != null) {
-            String messageContext = trainRecord.getContent();
-            JSONArray jsonArray = new JSONArray(messageContext);
-            messages = JSONUtil.toList(jsonArray, Message.class);
-            //截取最近十条内容进行回复 暂不支持
-            /*if (messages.size() >= 10) {
-                messages = messages.subList(1, 10);
-            }*/
-            Message currentMessage = Message.builder().content(chatRequest.getMsg()).role(Message.Role.USER).build();
-            messages.add(currentMessage);
-        } else {
-            Message systemMessage = Message.builder().content(SaberSakyamuniDrillEnum.ROLE.getContent()).role(Message.Role.SYSTEM).build();
-            messages.add(systemMessage);
-            Message currentMessage = Message.builder().content(chatRequest.getMsg()).role(Message.Role.USER).build();
-            messages.add(currentMessage);
+        switch (type) {
+            case COMMON:
+                //查询用户历史聊天key
+                if (trainRecord != null) {
+                    String messageContext = trainRecord.getContent();
+                    JSONArray jsonArray = new JSONArray(messageContext);
+                    messages = JSONUtil.toList(jsonArray, Message.class);
+                    //截取最近十条内容进行回复 暂不支持
+                    /*if (messages.size() >= 10) {
+                        messages = messages.subList(1, 10);
+                    }*/
+                    Message currentMessage = Message.builder().content(chatRequest.getMsg()).role(Message.Role.USER).build();
+                    messages.add(currentMessage);
+                } else {
+                    Message systemMessage = Message.builder().content(SaberSakyamuniDrillEnum.ROLE.getContent()).role(Message.Role.SYSTEM).build();
+                    messages.add(systemMessage);
+                    Message currentMessage = Message.builder().content(chatRequest.getMsg()).role(Message.Role.USER).build();
+                    messages.add(currentMessage);
+                }
+                break;
+            case SIGN:
+                if (drawLotsEnum == null) {
+                    log.info("请选择您要抽的签 {}", uid);
+                    throw new BaseException("请选择您要抽的签~");
+                }
+                Message systemMessage = Message.builder().content(SaberSakyamuniDrillEnum.ROLE.getContent() + ";" + SaberSakyamuniDrillEnum.DRAW_LOTS.getContent()).role(Message.Role.SYSTEM).build();
+                messages.add(systemMessage);
+                Message currentMessage = Message.builder().content(SaberCustomDialogEnum.DRAW_LOTS.getContent() + drawLotsEnum.getContent()).role(Message.Role.USER).build();
+                messages.add(currentMessage);
+                break;
+            default:
+                break;
         }
 
         SseEmitter sseEmitter = (SseEmitter) LocalCache.CACHE.get(uid);

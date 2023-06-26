@@ -117,6 +117,7 @@ public class SaberLoginController extends BaseController {
 	public AjaxResult login(TsysUser user, String captcha, RedirectAttributes redirectAttributes, boolean rememberMe,
 			HttpServletRequest request) {
 		// ModelAndView view =new ModelAndView();
+
 		Boolean yz = false;
 		// 获取session中的验证码
 		String verCode = (String) request.getSession().getAttribute("captcha");

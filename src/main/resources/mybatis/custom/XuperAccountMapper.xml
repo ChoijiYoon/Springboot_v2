@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.v2.mapper.custom.XuperAccountDao">
+  <resultMap id="BaseResultMap" type="com.fc.v2.model.xuper.XuperAccount">
+    <id column="id" property="id" />
+    <result column="user_id" property="userId" />
+    <result column="xuper_address" property="xuperAddress" />
+    <result column="mnemonic" property="mnemonic" />
+    <result column="private_key" property="privateKey" />
+    <result column="public_key" property="publicKey" />
+    <result column="json_private_key" property="jsonPrivateKey" />
+    <result column="json_public_key" property="jsonPublicKey" />
+    <result column="create_time" property="createTime" />
+    <result column="edit_time" property="editTime" />
+  </resultMap>
+   <sql id="Base_Column_List">
+     id, user_id, xuper_address, mnemonic, private_key, public_key, json_private_key, json_public_key, create_time, edit_time
+  </sql>
+  <insert id="insert" parameterType="com.fc.v2.model.xuper.XuperAccount">
+    insert into us_xuper_account (id, user_id, xuper_address, mnemonic, private_key, public_key, json_private_key, json_public_key, create_time, edit_time)
+    values (#{userId}, #{userId}, #{xuperAddress}, #{mnemonic}, #{privateKey}, #{publicKey}, #{jsonPrivateKey}, #{jsonPublicKey}, #{createTime},
+    #{editTime})
+  </insert>
+ 
+  <select id="getByUserId" resultMap="BaseResultMap">
+    select * from us_xuper_account where user_id = #{userId}
+  </select>
+</mapper>

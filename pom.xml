@@ -227,6 +227,17 @@
 			<artifactId>chatgpt-java</artifactId>
 			<version>1.0.12</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.baidu.xuper</groupId>
+			<artifactId>xasset-sdk-java</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baidu.xuper</groupId>
+			<artifactId>xuper-java-sdk</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 	</dependencies>
 
     <build>

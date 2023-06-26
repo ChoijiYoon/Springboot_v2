@@ -47,11 +47,6 @@ import java.util.Map;
 public class UserMessageController extends BaseController {
 	private static Logger logger = LoggerFactory.getLogger(UserMessageController.class);
 
-	/**
-	 *
-	 */
-	private final String prefix = "saber";
-	
 	@Autowired
 	private UserMessageHistoryService messageHistoryService;
 

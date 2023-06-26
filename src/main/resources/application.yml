@@ -138,7 +138,15 @@ sa-token:
 #chatGpt
 chatgpt:
   #多个key英文逗号分割
-  apiKey: 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
+  apiKey: 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
   #默认https://api.openai.com，如有自定义代理host，填写自定义代理host
   # 自定义代理host教程看https://github.com/Grt1228/chatgpt-java   ReadMe
   apiHost: https://api.openai-proxy.com/
+
+xuperasset:
+  #appId
+  appId: 110886
+  #accessKey
+  accessKey: 07990207962d0554db054273e73c70ad
+  #secretKey
+  secretKey: b169d3ebc95f4b66c08e08b7726dc6ec

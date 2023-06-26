@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "fuce")
-public class V2Config
-{
+public class V2Config {
     /** 项目名称 */
     private String name;
     /** 版本 */

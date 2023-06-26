@@ -1094,3 +1094,17 @@ CREATE TABLE `us_message_history` (
                                       PRIMARY KEY (`id`),
                                       KEY `idx_user_id` (`user_id`) USING BTREE COMMENT '用户id索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户对话历史记录';
+
+CREATE TABLE `us_xuper_account` (
+                                    `id` int(10) NOT NULL,
+                                    `user_id` int(10) DEFAULT NULL COMMENT '用户id',
+                                    `xuper_address` varchar(512) DEFAULT NULL COMMENT '区块链地址',
+                                    `mnemonic` varchar(512) DEFAULT NULL COMMENT '助记词',
+                                    `private_key` varchar(512) DEFAULT NULL COMMENT '私钥',
+                                    `public_key` varchar(512) DEFAULT NULL COMMENT '公钥',
+                                    `json_private_key` varchar(1024) DEFAULT NULL COMMENT '私钥json',
+                                    `json_public_key` varchar(1024) DEFAULT NULL COMMENT '公钥json',
+                                    `create_time` int(10) DEFAULT NULL COMMENT '创建时间',
+                                    `edit_time` int(10) DEFAULT NULL COMMENT '修改时间',
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='区块链账户（与user表关联）'

@@ -1096,7 +1096,7 @@ CREATE TABLE `us_message_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户对话历史记录';
 
 CREATE TABLE `us_xuper_account` (
-                                    `id` int(10) NOT NULL,
+                                    `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
                                     `user_id` int(10) DEFAULT NULL COMMENT '用户id',
                                     `xuper_address` varchar(512) DEFAULT NULL COMMENT '区块链地址',
                                     `mnemonic` varchar(512) DEFAULT NULL COMMENT '助记词',
